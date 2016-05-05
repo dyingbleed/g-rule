@@ -1,36 +1,20 @@
 # g-rule
 轻量级规则引擎
 
-## Demo
+## 说明
 
-    public class App {
+*g-rule* 是一个轻量级的规则引擎，支持以下两种规则：
 
-        public static void main(String[] args) {
-            Context context = new SimpleContext();
+* 自定义规则
+* Groovy 脚本
 
-            Action action = new TestAction();
-            Condition condition = new TestCondition();
-            condition.registerFalseAction(action);
+## 单元
 
-            RuleEngine.getInstance().setEntry(condition).run(context);
-        }
+## 动作单元
 
-        public static class TestCondition extends AbstractCondition {
-            public void check(Context context) {
-                System.out.println("condition run!");
-                context.set("test", "ok");
-            }
+执行动作。
 
-            public boolean getResult() {
-                return false;
-            }
-        }
+## 条件单元
 
-        public static class TestAction extends AbstractAction {
-            public void run(Context context) {
-                System.out.println("action run!");
-                System.out.println(context.get("test"));
-            }
-        }
+执行动作并返回真假，并根据结果执行相应的单元。
 
-    }
