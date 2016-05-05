@@ -1,7 +1,7 @@
 package com.muziyuchen.grule.condition;
 
+import com.muziyuchen.grule.Unit;
 import com.muziyuchen.grule.action.Action;
-import com.muziyuchen.grule.context.Context;
 
 /**
  * 抽象条件类
@@ -9,23 +9,23 @@ import com.muziyuchen.grule.context.Context;
  */
 public abstract class AbstractCondition implements Condition {
 
-    protected Action _trueAction = null;
+    protected Unit _trueUnit = null;
 
-    protected Action _falseAction = null;
+    protected Unit _falseUnit = null;
 
-    public final void registerTrueAction(Action action) {
-        this._trueAction = action;
+    public final void registerTrueUnit(Unit unit) {
+        this._trueUnit = unit;
     }
 
-    public final void registerFalseAction(Action action) {
-        this._falseAction = action;
+    public final void registerFalseUnit(Unit unit) {
+        this._falseUnit = unit;
     }
 
-    public final Action next() {
+    public final Unit next() {
         if (this.getResult()) {
-            return this._trueAction;
+            return this._trueUnit;
         } else {
-            return this._falseAction;
+            return this._falseUnit;
         }
     }
 }

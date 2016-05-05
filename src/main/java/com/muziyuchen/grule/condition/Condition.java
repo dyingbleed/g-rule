@@ -16,15 +16,15 @@ public interface Condition extends Unit {
     public boolean getResult();
 
     /**
-     * 注册条件为真时执行的动作
-     * @param action 动作
+     * 注册条件为真时执行的单元
+     * @param unit 单元
      */
-    public void registerTrueAction(Action action);
+    public void registerTrueUnit(Unit unit);
 
     /**
-     * 注册条件为假时执行的动作
-     * @param action 动作
+     * 注册条件为假时执行的单元
+     * @param unit 单元
      */
-    public void registerFalseAction(Action action);
+    public void registerFalseUnit(Unit unit);
 
 }
