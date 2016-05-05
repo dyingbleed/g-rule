@@ -4,6 +4,7 @@ import com.muziyuchen.grule.action.Action;
 import com.muziyuchen.grule.context.Context;
 
 /**
+ * 抽象条件类
  * Created by LI_ZHEN on 2016/5/5.
  */
 public abstract class AbstractCondition implements Condition {

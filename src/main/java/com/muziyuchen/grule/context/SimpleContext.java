@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 简单的上下文实现
  * Created by LI_ZHEN on 2016/5/5.
  */
 public class SimpleContext implements Context {
@@ -14,7 +15,7 @@ public class SimpleContext implements Context {
         this._map = new HashMap<String, Object>();
     }
 
-    public void set(String key, Object value) {
+    public void put(String key, Object value) {
         this._map.put(key, value);
     }
 

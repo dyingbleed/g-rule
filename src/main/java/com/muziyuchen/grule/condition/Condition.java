@@ -2,20 +2,29 @@ package com.muziyuchen.grule.condition;
 
 import com.muziyuchen.grule.Unit;
 import com.muziyuchen.grule.action.Action;
-import com.muziyuchen.grule.context.Context;
-import com.muziyuchen.grule.exception.ConditionCheckException;
 
 /**
+ * 条件单元接口
  * Created by LI_ZHEN on 2016/5/5.
  */
 public interface Condition extends Unit {
 
-    public void check(Context context) throws ConditionCheckException;
-
+    /**
+     * 获取条件执行结果
+     * @return 真或假
+     * */
     public boolean getResult();
 
+    /**
+     * 注册条件为真时执行的动作
+     * @param action 动作
+     */
     public void registerTrueAction(Action action);
 
+    /**
+     * 注册条件为假时执行的动作
+     * @param action 动作
+     */
     public void registerFalseAction(Action action);
 
 }
