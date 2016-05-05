@@ -8,5 +8,32 @@
     <artifactId>g-rule</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <groovy-version>2.4.6</groovy-version>
+        <maven-compiler-plugin-version>3.5.1</maven-compiler-plugin-version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>${groovy-version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>g-rule</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin-version}</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
