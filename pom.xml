@@ -10,6 +10,7 @@
 
     <properties>
         <groovy-version>2.4.6</groovy-version>
+        <fastjson-version>1.2.11</fastjson-version>
         <junit-version>4.12</junit-version>
         <mockito-version>1.10.19</mockito-version>
         <maven-compiler-plugin-version>3.5.1</maven-compiler-plugin-version>
@@ -20,6 +21,11 @@
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
             <version>${groovy-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson-version}</version>
         </dependency>
         <!-- for test -->
         <dependency>

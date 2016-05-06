@@ -1,7 +1,9 @@
 package com.muziyuchen.grule;
 
 import com.muziyuchen.grule.context.Context;
+import com.muziyuchen.grule.exception.AutoConfigException;
 import com.muziyuchen.grule.exception.UnitRunException;
+import com.muziyuchen.grule.helper.JSONConfigrationHelper;
 
 /**
  * 规则引擎
@@ -62,8 +64,23 @@ public class RuleEngine {
      * 获取入口单元
      * @return 入口单元
      * */
-    public  Unit getEntry() {
+    public Unit getEntry() {
         return this.entry;
+    }
+
+    /**
+     * 使用 JSON 配置文件自动装配规则引擎
+     * @param json JSON 配置文件
+     * */
+    public RuleEngine config(String json) throws AutoConfigException {
+        if (json != null && json.trim().length() != 0) {
+            try {
+                setEntry(JSONConfigrationHelper.parse(json));
+            } catch (IllegalAccessException | InstantiationException | ClassNotFoundException e) {
+                throw new AutoConfigException(e);
+            }
+        }
+        return this;
     }
 
 }
