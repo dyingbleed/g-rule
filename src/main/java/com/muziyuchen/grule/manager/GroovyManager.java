@@ -1,4 +1,4 @@
-package com.muziyuchen.grule.groovy;
+package com.muziyuchen.grule.manager;
 
 import com.muziyuchen.grule.context.Context;
 import groovy.lang.GroovyClassLoader;

@@ -2,7 +2,7 @@ package com.muziyuchen.grule.action;
 
 import com.muziyuchen.grule.context.Context;
 import com.muziyuchen.grule.exception.UnitRunException;
-import com.muziyuchen.grule.groovy.GroovyManager;
+import com.muziyuchen.grule.manager.GroovyManager;
 
 import java.io.File;
 import java.io.IOException;
