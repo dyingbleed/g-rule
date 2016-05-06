@@ -16,7 +16,15 @@ public class GrovvyCondition extends AbstractCondition {
 
     private Class groovyClass = null;
 
-    private Boolean result;
+    private String path;
+    private String script;
+
+    private Boolean result = false;
+
+    /**
+     * Groovy 条件类
+     * */
+    public GrovvyCondition() { super(); }
 
     /**
      * Groovy 条件类
@@ -39,8 +47,21 @@ public class GrovvyCondition extends AbstractCondition {
 
     public void run(Context context) throws UnitRunException {
         try {
+            if (this.groovyClass == null) {
+                /*
+                 * 如果 Groovy 类为空
+                 * 根据 path 和 script 字段获取 Groovy 类
+                 */
+                if (this.path != null && this.path.trim().length() != 0) {
+                    File file = new File(this.path);
+                    if (file.exists()) this.groovyClass = GroovyManager.getInstance().getGroovyClassLoader().parseClass(file);
+                } else if (this.script != null && this.script.trim().length() != 0) {
+                    this.groovyClass = GroovyManager.getInstance().getGroovyClassLoader().parseClass(script);
+                }
+            }
+
             this.result = (Boolean) GroovyManager.getInstance().invokeMethod(this.groovyClass, "run", context);
-        } catch (InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
+        } catch (IOException | InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
             throw new UnitRunException(e);
         }
     }

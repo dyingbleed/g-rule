@@ -9,6 +9,8 @@ public interface Constants {
 
     public static final String JSON_FIELDNAME_CLASS = "class"; // Java 类名
 
+    public static final String JSON_FIELDNAME_FIELDS = "fields"; // Java 类名
+
     public static final String JSON_FIELDNAME_ACTION_UNIT = "unit"; // action 执行单元
 
     public static final String JSON_FIELDNAME_CONDITION_TRUEUNIT = "true_unit"; // condition 为 true 时的执行单元
