@@ -2,12 +2,11 @@ package com.muziyuchen.grule.condition;
 
 import com.muziyuchen.grule.context.Context;
 import com.muziyuchen.grule.exception.UnitRunException;
-import com.muziyuchen.grule.manager.GroovyManager;
+import com.muziyuchen.grule.groovy.GroovyManager;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 /**
  * Groovy 条件类
@@ -15,35 +14,38 @@ import java.lang.reflect.Method;
  */
 public class GrovvyCondition extends AbstractCondition {
 
-    private File _groovyScriptFile;
+    private Class groovyClass = null;
 
-    private Boolean _result;
+    private Boolean result;
 
     /**
      * Groovy 条件类
      * @param file Groovy 脚本文件
+     * @throws IOException
      * */
-    public GrovvyCondition(File file) {
+    public GrovvyCondition(File file) throws IOException {
         super();
-        this._groovyScriptFile = file;
+        if (file != null && file.exists()) this.groovyClass = GroovyManager.getInstance().getGroovyClassLoader().parseClass(file);
+    }
+
+    /**
+     * Groovy 条件类
+     * @param script Groovy 脚本
+     * */
+    public GrovvyCondition(String script) {
+        super();
+        if (script != null && script.trim().length() != 0) this.groovyClass = GroovyManager.getInstance().getGroovyClassLoader().parseClass(script);
     }
 
     public void run(Context context) throws UnitRunException {
-        if (this._groovyScriptFile != null && this._groovyScriptFile.exists()) {
-            try {
-                Class conditionClass = GroovyManager.getInstance().getGroovyClassLoader().parseClass(this._groovyScriptFile);
-                Method checkMethod = conditionClass.getMethod("run", Context.class);
-                Object conditionInstance = conditionClass.newInstance();
-                this._result = (Boolean)checkMethod.invoke(conditionInstance, context);
-            } catch (IOException | InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
-                throw new UnitRunException(e);
-            }
-        } else {
-            throw new UnitRunException("Groovy file is null or not exist.");
+        try {
+            this.result = (Boolean) GroovyManager.getInstance().invokeMethod(this.groovyClass, "run", context);
+        } catch (InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
+            throw new UnitRunException(e);
         }
     }
 
     public boolean getResult() {
-        return this._result;
+        return this.result;
     }
 }
