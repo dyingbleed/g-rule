@@ -1,18 +1,20 @@
 package com.muziyuchen.grule;
 
 import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
 
 import com.muziyuchen.grule.action.AbstractAction;
 import com.muziyuchen.grule.action.Action;
+import com.muziyuchen.grule.action.ActionTest;
 import com.muziyuchen.grule.action.GroovyAction;
 import com.muziyuchen.grule.condition.AbstractCondition;
 import com.muziyuchen.grule.condition.Condition;
 import com.muziyuchen.grule.condition.GrovvyCondition;
+import com.muziyuchen.grule.condition.ConditionTest;
 import com.muziyuchen.grule.context.SimpleContext;
+import com.muziyuchen.grule.exception.AutoConfigException;
 import org.junit.Test;
 
-import java.io.File;
+import java.io.IOException;
 
 /**
  * 规则引擎测试类
@@ -32,13 +34,33 @@ public class RuleEngineTest {
     }
 
     @Test
-    public void testRunGroovy() {
-        Condition condition = new GrovvyCondition(new File("C:\\Users\\LI_ZHEN\\Desktop\\TestCondition.groovy"));
-        GroovyAction action = new GroovyAction(new File("C:\\Users\\LI_ZHEN\\Desktop\\TestAction.groovy"));
+    public void testRunGroovy() throws IOException {
+        String conditionScript = "import com.muziyuchen.grule.context.Context\n" +
+                "class TestCondition {\n" +
+                "    boolean run(Context contex) {\n" +
+                "\t\tcontex.put(\"test\", \"hello\")\n" +
+                "\t\treturn true\n" +
+                "\t}\n" +
+                "}";
+        String actionScript = "import com.muziyuchen.grule.context.Context\n" +
+                "import static org.junit.Assert.*;\n" +
+                "class TestAction {\n" +
+                "    void run(Context context) {\n" +
+                "\t\tassertEquals(context.get(\"test\"), \"hello\")\n" +
+                "\t}\n" +
+                "}";
+        Condition condition = new GrovvyCondition(conditionScript);
+        GroovyAction action = new GroovyAction(actionScript);
 
         condition.registerTrueUnit(action);
 
         RuleEngine.getInstance().setEntry(condition).run(new SimpleContext());
+    }
+
+    @Test
+    public void testJSONConfigRun() throws AutoConfigException {
+        String json = "{\"type\":\"condition\",\"class\":\"" + ConditionTest.class.getName() + "\",\"true_unit\":{\"type\":\"action\",\"class\":\"" + ActionTest.class.getName() + "\"}}";
+        RuleEngine.getInstance().config(json).run(new SimpleContext());
     }
 
 }
