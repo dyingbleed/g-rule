@@ -5,6 +5,8 @@ import com.muziyuchen.grule.exception.UnitRunException;
 import com.muziyuchen.grule.manager.GroovyManager;
 
 import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
@@ -33,11 +35,11 @@ public class GrovvyCondition extends AbstractCondition {
                 Method checkMethod = conditionClass.getMethod("run", Context.class);
                 Object conditionInstance = conditionClass.newInstance();
                 this._result = (Boolean)checkMethod.invoke(conditionInstance, context);
-            } catch (Exception ignore) {
-                throw new UnitRunException();
+            } catch (IOException | InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
+                throw new UnitRunException(e);
             }
         } else {
-            throw new UnitRunException();
+            throw new UnitRunException("Groovy file is null or not exist.");
         }
     }
 
