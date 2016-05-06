@@ -18,7 +18,7 @@ public class RuleEngine {
         return sharedInstance;
     }
 
-    private Unit _entry;
+    private Unit entry;
 
     private RuleEngine() {
     }
@@ -44,7 +44,8 @@ public class RuleEngine {
      * @param context 上下文
      * */
     public void run(Context context) {
-        runLoop(this._entry, context);
+        if (context == null) throw new IllegalArgumentException("Context should not be null.");
+        runLoop(this.entry, context);
     }
 
     /**
@@ -53,8 +54,16 @@ public class RuleEngine {
      * @return 规则引擎
      * */
     public RuleEngine setEntry(Unit unit) {
-        this._entry = unit;
+        this.entry = unit;
         return this;
+    }
+
+    /**
+     * 获取入口单元
+     * @return 入口单元
+     * */
+    public  Unit getEntry() {
+        return this.entry;
     }
 
 }
