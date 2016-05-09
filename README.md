@@ -3,18 +3,8 @@
 
 ## 说明
 
-*g-rule* 是一个轻量级的规则引擎，支持以下两种规则：
+*g-rule* 是一个使用 Java 语言编写的轻量级规则引擎，支持使用 Groovy 脚本语言进行扩展。
 
-* 自定义规则
-* Groovy 脚本
+项目首页：<http://muziyuchen.com/g-rule>
 
-## 单元
-
-## 动作单元
-
-执行动作。
-
-## 条件单元
-
-执行动作并返回真假，并根据结果执行相应的单元。
-
+项目文档：<https://github.com/dyingbleed/g-rule/wiki>
