@@ -1,4 +1,4 @@
-package com.muziyuchen.grule.helper;
+package com.muziyuchen.grule;
 
 import com.alibaba.fastjson.JSONObject;
 import com.muziyuchen.grule.Constants;
@@ -11,7 +11,7 @@ import java.lang.reflect.Field;
 /**
  * Created by LI_ZHEN on 2016/5/6.
  */
-public class JSONConfigrationHelper {
+class JSONConfigHelper {
 
     private static Unit parseLoop(JSONObject jo) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         Unit unit = null;

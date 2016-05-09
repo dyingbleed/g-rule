@@ -3,7 +3,6 @@ package com.muziyuchen.grule;
 import com.muziyuchen.grule.context.Context;
 import com.muziyuchen.grule.exception.AutoConfigException;
 import com.muziyuchen.grule.exception.UnitRunException;
-import com.muziyuchen.grule.helper.JSONConfigrationHelper;
 
 /**
  * 规则引擎
@@ -75,7 +74,7 @@ public class RuleEngine {
     public RuleEngine config(String json) throws AutoConfigException {
         if (json != null && json.trim().length() != 0) {
             try {
-                setEntry(JSONConfigrationHelper.parse(json));
+                setEntry(JSONConfigHelper.parse(json));
             } catch (IllegalAccessException | InstantiationException | ClassNotFoundException e) {
                 throw new AutoConfigException(e);
             }

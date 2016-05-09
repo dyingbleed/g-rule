@@ -3,7 +3,7 @@ package com.muziyuchen.grule;
 /**
  * Created by LI_ZHEN on 2016/5/6.
  */
-public interface Constants {
+interface Constants {
 
     public static final String JSON_FIELDNAME_TYPE = "type"; // 单元类型
 
